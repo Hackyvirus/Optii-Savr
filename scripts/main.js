@@ -2265,7 +2265,7 @@ async function updatePDFAndDownload(
     <head>
       <title>Optitx's Report</title>
       <!-- Link to external CSS file -->
-      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="css/style.css">
 
       <style>
         /* In-line styles if needed to override or add specific styles for the new tab's content */

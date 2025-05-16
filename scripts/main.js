@@ -1338,7 +1338,7 @@ async function updatePDFAndDownload(
     return null;
   }
   const result = findFinalFile(baseValues, keys);
-  let url = "reports/" + result.fileName;
+  let url = "Reports/" + result.fileName;
   console.log("url", url);
   const existingPdfBytes = await fetch(url).then((res) => res.arrayBuffer());
   isNaN(value2) ? (value2 = 0) : (value2 = value2);

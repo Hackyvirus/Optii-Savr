@@ -1117,7 +1117,8 @@ button:disabled {
   transition: width 0.3s;
 }
 
-#rawmaterials,#rawmaterials2{
+#rawmaterials,
+#rawmaterials2 {
   width: 100%;
 }
 @media (max-width: 768px) {
@@ -1126,7 +1127,7 @@ button:disabled {
     line-height: 40px;
     margin-bottom: 16px;
   }
-  .fourth-title{
+  .fourth-title {
     line-height: 24px;
   }
   header {
@@ -1193,7 +1194,6 @@ button:disabled {
   header h2 {
     font-size: 2rem;
     text-align: center;
-    /* fon  */
     line-height: normal;
   }
   #main h2 {
@@ -1228,7 +1228,7 @@ button:disabled {
     font-size: 16px;
     line-height: 24px;
   }
-  main{
+  main {
     width: 100%;
     box-sizing: border-box;
   }
@@ -1269,8 +1269,8 @@ button:disabled {
   .preview-container {
     max-height: 500px;
   }
-  .tooltip-container{
-    height:22px;
+  .tooltip-container {
+    height: 22px;
   }
   .manual a {
     color: rgba(34, 48, 116, 1);

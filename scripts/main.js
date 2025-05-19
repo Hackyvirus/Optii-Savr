@@ -2252,7 +2252,7 @@ async function updatePDFAndDownload(
       <title>Optitx's Report</title>
       <!-- Link to external CSS file -->
       <link rel="stylesheet" href="css/style.css">
-
+      <link rel="shortcut icon" href="https://optitaxs.com/wp-content/uploads/2022/06/cropped-favicon-192x192.png" type="image/x-icon" />
       <style>
         /* In-line styles if needed to override or add specific styles for the new tab's content */
         iframe {

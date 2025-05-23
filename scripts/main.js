@@ -138,41 +138,41 @@ function calculateDepreciationValue(value, grossIntendedPeriod) {
     if (Q >= 1 && Q <= 4) {
       P = 4;
       h -= P;
-      // console.log("H", h);
+      console.log("H", h);
       if (h == 84) {
         result = value * (h / 100);
-        // console.log("result1", result);
+        console.log("result1", result);
       }
     }
     if (Q >= 5 && Q <= 12) {
       P = 3;
       h -= P;
-      // console.log("H", h);
+      console.log("H", h);
       if (h == 72 || h == 60) {
         result = value * (h / 100);
-        // console.log("result2", result);
+        console.log("result2", result);
       }
     }
     if (Q >= 13 && Q <= 20) {
       P = 2.5;
       h -= P;
-      // console.log("H", h);
+      console.log("H", h);
       if (h == 50 || h == 40) {
         result = value * (h / 100);
-        // console.log("result3", result);
+        console.log("result3", result);
       }
     }
     if (Q >= 21 && Q <= 40) {
       P = 2;
       h -= P;
-      // console.log("H", h);
+      console.log("H", h);
       if (h == 32 || h == 24 || h == 16 || h == 8 || h == 0) {
         result = value * (h / 100);
-        // console.log("result2", result);
+        console.log("result2", result);
       }
     }
   }
-  // console.log("result4", result);
+  console.log("result4", result);
   return result;
 }
 
@@ -212,7 +212,7 @@ let RawTotalDuty = CalculateDuty(
   safeParseFloat(GrossRawSGD),
   safeParseFloat(GrossRawCWD)
 );
-// console.log("Total", RawTotalDuty);
+console.log("Total", RawTotalDuty);
 
 async function getAllInputValues() {
   // Gross Value of Captical Goods imported
@@ -317,7 +317,7 @@ async function getAllInputValues() {
   GrossRawBCD2 = safeParseFloat(
     document.getElementById("first-right-input22").value
   );
-  // console.log("GrossRawBCD2", GrossRawBCD2);
+  console.log("GrossRawBCD2", GrossRawBCD2);
   GrossRawAIDC2 = safeParseFloat(
     document.getElementById("second-left-input22").value
   );
@@ -406,14 +406,14 @@ async function getAllInputValues() {
   );
 
   // Gross Values of Common questions
-  ExpectedAnnualGrowth = getSafeFloatInput("first-right-input3",5)
+  ExpectedAnnualGrowth = getSafeFloatInput("first-right-input3", 5);
   domesticSales = safeParseFloat(
     document.getElementById("domestic-sales").value
   );
   exportSales = safeParseFloat(document.getElementById("export-sales").value);
-  rateOfInterest = getSafeFloatInput("second-left-input3",9)
-  timeGap = getSafeFloatInput("second-right-input3",35)
-  // console.log("TimeGap",timeGap)
+  rateOfInterest = getSafeFloatInput("second-left-input3", 9);
+  timeGap = getSafeFloatInput("second-right-input3", 35);
+  console.log("TimeGap", timeGap);
 
   annualValueofRoDTEP = safeParseFloat(
     document.getElementById("third-left-input3").value
@@ -421,7 +421,7 @@ async function getAllInputValues() {
   GrossAnnualValue = safeParseFloat(
     document.getElementById("third-right-input3").value
   );
-  conversionOfRaw = getSafeFloatInput("fourth-right-input3",60)
+  conversionOfRaw = getSafeFloatInput("fourth-right-input3", 60);
   deemedExport = safeParseFloat(
     document.getElementById("fifth-left-input5").value
   );
@@ -459,7 +459,7 @@ async function getAllInputValues() {
     igstOnImportServices
   );
   // total calculation
-  // console.log("firstCal");
+  console.log("firstCal");
   // Imported capital goods
 
   // 1) Total Import Duty (Row 1 (all Cells))
@@ -472,7 +472,7 @@ async function getAllInputValues() {
     safeParseFloat(grossCWD)
   );
   let totalDutyandIGST = CalculateDuty(totalDuty, grossIGST);
-  // console.log("1) totalDuty", totalDuty);
+  console.log("1) totalDuty", totalDuty);
 
   // 2) EPCG AA + BR (Row 2 (First AND Second Cell))
   let EPCGValue = "Nil";
@@ -500,11 +500,11 @@ async function getAllInputValues() {
     5,
     6
   );
-  // console.log("exportSales", exportSales);
-  // console.log("SEZsale", SEZsale);
-  // console.log("deemedExport", deemedExport);
-  // console.log("TotalExportForSixYears", TotalExportForSixYears);
-  // console.log("ExportObligationForEPCG", ExportObligationForEPCG);
+  console.log("exportSales", exportSales);
+  console.log("SEZsale", SEZsale);
+  console.log("deemedExport", deemedExport);
+  console.log("TotalExportForSixYears", TotalExportForSixYears);
+  console.log("ExportObligationForEPCG", ExportObligationForEPCG);
 
   // scenario 1A (applicable where EO in case of EPCG is completed within six years
   if (ExportObligationForEPCG < TotalExportForSixYears) {
@@ -516,32 +516,32 @@ async function getAllInputValues() {
   // scenario 1B (applicable where EO in case of EPCG is partially complete)
   if (ExportObligationForEPCG > TotalExportForSixYears) {
     let unfulfilledEO = ExportObligationForEPCG - TotalExportForSixYears;
-    // console.log("unfulfilledEO", unfulfilledEO);
+    console.log("unfulfilledEO", unfulfilledEO);
     let ratioOfUnfulfilledEO = (unfulfilledEO / ExportObligationForEPCG) * 100;
-    // console.log("ratioOfUnfulfilledEO", ratioOfUnfulfilledEO);
+    console.log("ratioOfUnfulfilledEO", ratioOfUnfulfilledEO);
     let unfulfilledEOUnderEPCG = (totalDuty * ratioOfUnfulfilledEO) / 100;
-    // console.log("unfulfilledEOUnderEPCG", unfulfilledEOUnderEPCG);
+    console.log("unfulfilledEOUnderEPCG", unfulfilledEOUnderEPCG);
     let IGSTPayableatSeventhYear = (grossIGST * ratioOfUnfulfilledEO) / 100;
-    // console.log("IGSTPayableatSeventhYear", IGSTPayableatSeventhYear);
+    console.log("IGSTPayableatSeventhYear", IGSTPayableatSeventhYear);
     let EPCGInterest =
       (((unfulfilledEOUnderEPCG + IGSTPayableatSeventhYear) * 15) / 100) * 7;
-    // console.log("EPCGInterest", EPCGInterest);
+    console.log("EPCGInterest", EPCGInterest);
     let totalCostOfRedemption = unfulfilledEOUnderEPCG + EPCGInterest;
-    // console.log("totalCostOfRedemption", totalCostOfRedemption);
+    console.log("totalCostOfRedemption", totalCostOfRedemption);
     let NPVOFcostofRedemption = CalculateNPV(
       totalCostOfRedemption,
       rateOfInterest,
       7
     );
-    // console.log("NPVOFcostofRedemption", NPVOFcostofRedemption);
+    console.log("NPVOFcostofRedemption", NPVOFcostofRedemption);
     EPCGValue = NPVOFcostofRedemption * -1;
   }
-  // console.log("2 A) EPCGValue", EPCGValue);
+  console.log("2 A) EPCGValue", EPCGValue);
 
   // 3) MOOWR Value (Row 2(Third Cell))
   // scenario 1 A (Sale In DTA)
   let RowTwoThirdCell = 0;
-  // console.log("grossDisposal", grossDisposal);
+  console.log("grossDisposal", grossDisposal);
   if (grossDisposal === "Sale in DTA") {
     RowTwoThirdCell =
       CalculateNPV(totalDuty, rateOfInterest, grossIntendedPeriod) * -1;
@@ -555,17 +555,17 @@ async function getAllInputValues() {
     RowTwoThirdCell = 0;
   }
   RowTwoThirdCell = safeParseFloat(RowTwoThirdCell);
-  // console.log("2 B) RowTwoThirdCell", RowTwoThirdCell);
+  console.log("2 B) RowTwoThirdCell", RowTwoThirdCell);
 
   // 4) EOU Value(Row 2(Fourth & Fifth Cell))
   let EOUValue = "N/A";
-  // console.log("TotalImport", TotalImport);
-  // console.log("TotalExport", TotalExport);
+  console.log("TotalImport", TotalImport);
+  console.log("TotalExport", TotalExport);
 
   let NFE = TotalExport - TotalImport;
-  // console.log("NFE", NFE);
+  console.log("NFE", NFE);
   if (NFE < 0) {
-    // console.log("NFE for the intended period of project is negative");
+    console.log("NFE for the intended period of project is negative");
     console.log(
       "EOU is not eligible because,totalImport ",
       TotalImport,
@@ -578,7 +578,7 @@ async function getAllInputValues() {
       totalDuty,
       grossIntendedPeriod
     );
-    // console.log("totalDutyDepre", totalDutyDepre);
+    console.log("totalDutyDepre", totalDutyDepre);
     console.log(
       "2 C) For EOU: Total value (Total Duty):  ",
       CalculateNPV(totalDutyDepre, rateOfInterest, grossIntendedPeriod)
@@ -590,16 +590,16 @@ async function getAllInputValues() {
   } else {
     EOUValue = "N/A";
   }
-  // console.log("2 C) For EOU:", EOUValue);
+  console.log("2 C) For EOU:", EOUValue);
   let totalSavings =
     safeParseFloat(grossIGST) *
     (safeParseFloat(rateOfInterest) / 100) *
     (safeParseFloat(timeGap) / 365);
-  // console.log("3) total Savings", totalSavings);
+  console.log("3) total Savings", totalSavings);
 
   // Domestically procured capital goods
   const AIRAccuredOnDTA = (domesticCapitalGoods * 1.5) / 100;
-  // console.log("4) AIRAccuredOnDTA", AIRAccuredOnDTA);
+  console.log("4) AIRAccuredOnDTA", AIRAccuredOnDTA);
   let DutySavedOnDomesticalyProcuredCPNetAIR;
   // for EPCG, BR, EOU
   const DutySavedOnDomesticalyProcuredCP =
@@ -624,33 +624,33 @@ async function getAllInputValues() {
   let EOFORDCG = TOTALDUTYINCLUDINGIGST * 6;
   if (EOFORDCG > TotalExportForSixYears) {
     let unfulfilledEOFORDCG = EOFORDCG - TotalExportForSixYears;
-    // console.log("unfulfilledEOFORDCG", unfulfilledEOFORDCG);
+    console.log("unfulfilledEOFORDCG", unfulfilledEOFORDCG);
 
     let ratioOfUnfulfilledFORDCG = (unfulfilledEOFORDCG / EOFORDCG) * 100;
-    // console.log("ratioOfUnfulfilledFORDCG", ratioOfUnfulfilledFORDCG);
+    console.log("ratioOfUnfulfilledFORDCG", ratioOfUnfulfilledFORDCG);
 
     let DOCOTIGSTPAEO7Y = BCDISWS * (ratioOfUnfulfilledFORDCG / 100);
-    // console.log("DOCOTIGSTPAEO7Y", DOCOTIGSTPAEO7Y);
+    console.log("DOCOTIGSTPAEO7Y", DOCOTIGSTPAEO7Y);
 
     let IGSTPayableatSeventhYear =
       (DCGANDBCDISWSIGST * ratioOfUnfulfilledFORDCG) / 100;
-    // console.log("IGSTPayableatSeventhYear", IGSTPayableatSeventhYear);
+    console.log("IGSTPayableatSeventhYear", IGSTPayableatSeventhYear);
 
     let DCGInterest =
       (((DOCOTIGSTPAEO7Y + IGSTPayableatSeventhYear) * 15) / 100) * 7;
-    // console.log("DCGInterest", DCGInterest);
+    console.log("DCGInterest", DCGInterest);
 
     let totalCostOfRedemption = DOCOTIGSTPAEO7Y + DCGInterest;
-    // console.log("totalCostOfRedemption", totalCostOfRedemption);
+    console.log("totalCostOfRedemption", totalCostOfRedemption);
     let NPVOFcostofRedemption = CalculateNPV(
       totalCostOfRedemption,
       rateOfInterest,
       7
     );
-    // console.log("NPVOFcostofRedemption", NPVOFcostofRedemption);
+    console.log("NPVOFcostofRedemption", NPVOFcostofRedemption);
     DCGValue = NPVOFcostofRedemption;
   }
-  // console.log("6) DCGValue", DCGValue);
+  console.log("6) DCGValue", DCGValue);
 
   // Imported raw materials (for exports, SEZ supplies & deemed export)
   let RawTotalDuty = CalculateDuty(
@@ -661,7 +661,7 @@ async function getAllInputValues() {
     safeParseFloat(GrossRawSGD),
     safeParseFloat(GrossRawCWD)
   );
-  // console.log("Total", RawTotalDuty);
+  console.log("Total", RawTotalDuty);
 
   let E = 0;
   let totalBenifit = 0;
@@ -682,7 +682,7 @@ async function getAllInputValues() {
     lastNPV += npv;
     tempRaw = tempRaw * (safeParseFloat(ExpectedAnnualGrowth) / 100 + 1);
   }
-  // console.log("7) Raw NPV: ", lastNPV);
+  console.log("7) Raw NPV: ", lastNPV);
 
   let Digst = 0;
   let totalBenifitigst = 0;
@@ -704,7 +704,7 @@ async function getAllInputValues() {
     GrossRawIGST =
       GrossRawIGST * (safeParseFloat(ExpectedAnnualGrowth) / 100 + 1);
   }
-  // console.log("8) IGST", lastNPVigst);
+  console.log("8) IGST", lastNPVigst);
 
   let RawTotalDuty2 =
     safeParseFloat(GrossRawBCD2) +
@@ -713,7 +713,7 @@ async function getAllInputValues() {
     safeParseFloat(GrossRawADD2) +
     safeParseFloat(GrossRawSGD2) +
     safeParseFloat(GrossRawCWD2);
-  // console.log("Total", RawTotalDuty2);
+  console.log("Total", RawTotalDuty2);
 
   const totalDutyOnRMGE =
     GrossRawBCD +
@@ -741,7 +741,7 @@ async function getAllInputValues() {
       finishedGoods * (safeParseFloat(ExpectedAnnualGrowth) / 100 + 1);
   }
   lastNPVF = safeParseFloat(lastNPVF);
-  // console.log("9) totalDutyOnRMGE", lastNPVF);
+  console.log("9) totalDutyOnRMGE", lastNPVF);
 
   let E2 = 0;
   let totalBenifit2 = 0;
@@ -762,7 +762,7 @@ async function getAllInputValues() {
     lastNPV2 += npv2;
     tempRaw2 = tempRaw2 * (safeParseFloat(ExpectedAnnualGrowth) / 100 + 1);
   }
-  // console.log("10) Raw NPV: ", lastNPV2);
+  console.log("10) Raw NPV: ", lastNPV2);
 
   let Digst2 = 0;
   let totalBenifitigst2 = 0;
@@ -773,7 +773,7 @@ async function getAllInputValues() {
       safeParseFloat(GrossRawIGST2) *
       (parseFloat(safeParseFloat(timeGap)) / 365) *
       (parseFloat(safeParseFloat(rateOfInterest)) / 100);
-    // console.log("totalBenifitigst2", totalBenifitigst2);
+    console.log("totalBenifitigst2", totalBenifitigst2);
     if (Digst2 == 0) {
       Digst2 = safeParseFloat(rateOfInterest) / 100 + 1;
     } else {
@@ -784,7 +784,7 @@ async function getAllInputValues() {
     GrossRawIGST2 =
       GrossRawIGST2 * (safeParseFloat(ExpectedAnnualGrowth) / 100 + 1);
   }
-  // console.log("11) IGST", lastNPVigst2);
+  console.log("11) IGST", lastNPVigst2);
 
   let RawTotalDuty3 =
     safeParseFloat(GrossRawDomesticBCD) +
@@ -793,7 +793,7 @@ async function getAllInputValues() {
     safeParseFloat(GrossRawDomesticADD) +
     safeParseFloat(GrossRawDomesticSGD) +
     safeParseFloat(GrossRawDomesticCWD);
-  // console.log("Total", RawTotalDuty3);
+  console.log("Total", RawTotalDuty3);
 
   // Domestic Raw Materials
   const AIRAccuredOnDTARawMaterial = (DomesticRawMaterialValueSEZ * 1.5) / 100;
@@ -803,7 +803,7 @@ async function getAllInputValues() {
     AIRAccuredOnDTARawMaterial,
     AIRAccuredOnDTARawMaterial2
   );
-  // console.log("AIRAccuredOnTARawMaterial", AIRAccuredOnTARawMaterial);
+  console.log("AIRAccuredOnTARawMaterial", AIRAccuredOnTARawMaterial);
   let DRM = 0;
   let lastNPVDRM = 0;
   let npvDRM;
@@ -821,8 +821,8 @@ async function getAllInputValues() {
       tempAIRAccuredOnTARawMaterial *
       (safeParseFloat(ExpectedAnnualGrowth) / 100 + 1);
   }
-  // console.log("A. AIRAccuredOnDTA", AIRAccuredOnDTARawMaterial);
-  // console.log("B. AIRAccuredOnDTA", AIRAccuredOnDTARawMaterial2);
+  console.log("A. AIRAccuredOnDTA", AIRAccuredOnDTARawMaterial);
+  console.log("B. AIRAccuredOnDTA", AIRAccuredOnDTARawMaterial2);
   console.log(
     "12) Total AIR Accured on DTA for SEZ and Domestic Sale",
     lastNPVDRM
@@ -856,8 +856,8 @@ async function getAllInputValues() {
     tempRaw3 = tempRaw3 * (safeParseFloat(ExpectedAnnualGrowth) / 100 + 1);
   }
 
-  // console.log("**) lastNPV3", lastNPV3);
-  // console.log("**) lastNPVDRM", lastNPVDRM);
+  console.log("**) lastNPV3", lastNPV3);
+  console.log("**) lastNPVDRM", lastNPVDRM);
 
   DutySavedOnDomesticalyProcuredCPRawMaterialNetAIR = lastNPV3 - lastNPVDRM;
   console.log(
@@ -888,25 +888,25 @@ async function getAllInputValues() {
     ((DomesticRawMaterialValueSEZ + DomesticRawMaterialValueDomesticSale) *
       18) /
     100;
-  // console.log("CurrentIGST", CurrentIGST);
+  console.log("CurrentIGST", CurrentIGST);
   for (let i = 0; i < parseFloat(safeParseFloat(grossIntendedPeriod)); i++) {
     totalIgst =
       safeParseFloat(CurrentIGST) *
       (parseFloat(safeParseFloat(timeGap)) / 365) *
       (parseFloat(safeParseFloat(rateOfInterest)) / 100);
-    // console.log("totalBenifitigst2", totalIgst);
+    console.log("totalBenifitigst2", totalIgst);
     if (igst == 0) {
       igst = 1 + safeParseFloat(rateOfInterest) / 100;
     } else {
       igst = igst * (safeParseFloat(rateOfInterest) / 100 + 1);
     }
     NpvIgst = totalIgst / igst;
-    // console.log("NpvIgst", NpvIgst);
+    console.log("NpvIgst", NpvIgst);
     lastNpvIGST += NpvIgst;
     CurrentIGST =
       CurrentIGST * (safeParseFloat(ExpectedAnnualGrowth) / 100 + 1);
   }
-  // console.log("14) Saving Of oportunities cost of capital on ", lastNpvIGST);
+  console.log("14) Saving Of oportunities cost of capital on ", lastNpvIGST);
 
   // common question answer
 
@@ -925,14 +925,14 @@ async function getAllInputValues() {
     }
     npv4 = totalBenifitrodtep / Drodtep;
     npv5 = lastNPVradtepAndAir / Drodtep;
-    // console.log("NPV4", npv4);
-    // console.log("NPV5", npv5);
+    console.log("NPV4", npv4);
+    console.log("NPV5", npv5);
 
     lastNPVrodtep += npv4;
     lastNPVtotalBenifit += npv5;
 
-    // console.log("Total NPV of Redtep", lastNPVrodtep);
-    // console.log("Total NPV of AIR", lastNPVtotalBenifit);
+    console.log("Total NPV of Redtep", lastNPVrodtep);
+    console.log("Total NPV of AIR", lastNPVtotalBenifit);
 
     totalBenifitrodtep =
       totalBenifitrodtep * (safeParseFloat(ExpectedAnnualGrowth) / 100 + 1);
@@ -941,10 +941,10 @@ async function getAllInputValues() {
   }
   lastNPVrodtep = lastNPVrodtep * -1;
   lastNPVtotalBenifit = lastNPVtotalBenifit * -1;
-  // console.log("15) RoDTep Banifit", lastNPVrodtep);
-  // console.log("16) AIR Banifit", lastNPVtotalBenifit);
-  // console.log("17) gstOnConstruction", gstOnConstruction);
-  // console.log("18) constOfDuty", constOfDuty);
+  console.log("15) RoDTep Banifit", lastNPVrodtep);
+  console.log("16) AIR Banifit", lastNPVtotalBenifit);
+  console.log("17) gstOnConstruction", gstOnConstruction);
+  console.log("18) constOfDuty", constOfDuty);
   let WCSOIGSTOISIAD = igstOnprcuredvalue + igstOnImportServices;
   let Digst1 = 0;
   let totalBenifitigst1 = 0;
@@ -966,12 +966,12 @@ async function getAllInputValues() {
       WCSOIGSTOISIAD * (safeParseFloat(ExpectedAnnualGrowth) / 100 + 1);
   }
   lastNPVigst1 = lastNPVigst1;
-  // console.log("19) WCSOIGSTOISIAD", lastNPVigst1);
+  console.log("19) WCSOIGSTOISIAD", lastNPVigst1);
 
   let ACDPODSBSEZU = domesticSales - GrossRawCIF2;
-  // console.log("ACDPODSBSEZU", ACDPODSBSEZU);
-  // console.log("domesticSales", domesticSales);
-  // console.log("GrossRawCIF2", GrossRawCIF2);
+  console.log("ACDPODSBSEZU", ACDPODSBSEZU);
+  console.log("domesticSales", domesticSales);
+  console.log("GrossRawCIF2", GrossRawCIF2);
   let Digst5 = 0;
   let totalBenifitigst5 = 0;
   let lastNPVigst5 = 0;
@@ -990,18 +990,30 @@ async function getAllInputValues() {
     ACDPODSBSEZU =
       ACDPODSBSEZU * (safeParseFloat(ExpectedAnnualGrowth) / 100 + 1);
   }
-  // console.log("20) ACDPODSBSEZU", lastNPVigst5);
+  console.log("20) ACDPODSBSEZU", lastNPVigst5);
+  function normalizeValue(value) {
+    if (
+      value === "Nil" ||
+      value === "N/A" ||
+      value === null ||
+      value === undefined
+    ) {
+      return 0;
+    }
+    return value;
+  }
+
   let NetBeniftForAA =
-    totalDuty +
-    (EPCGValue == "Nil" ? 0 : EPCGValue) +
-    totalSavings +
-    DutySavedOnDomesticalyProcuredCP +
-    lastNPV +
-    lastNPVigst +
-    lastNPV3 +
-    lastNPVtotalBenifit +
-    lastNPVrodtep +
-    lastNPVF;
+    normalizeValue(totalDuty) +
+    normalizeValue(EPCGValue) +
+    normalizeValue(totalSavings) +
+    normalizeValue(DutySavedOnDomesticalyProcuredCP) +
+    normalizeValue(lastNPV) +
+    normalizeValue(lastNPVigst) +
+    normalizeValue(lastNPV3) +
+    normalizeValue(lastNPVtotalBenifit) +
+    normalizeValue(lastNPVrodtep) +
+    normalizeValue(lastNPVF);
   console.log(
     "totalDuty,EPCGValue,totalSavings,DutySavedOnDomesticalyProcuredCP,lastNPV,lastNPVigst,lastNPV3,lastNPVtotalBenifit,lastNPVrodtep,lastNPVF",
     totalDuty,
@@ -1015,15 +1027,16 @@ async function getAllInputValues() {
     lastNPVrodtep,
     lastNPVF
   );
+
   let NetBeniftForBR =
-    totalDuty +
-    (EPCGValue == "Nil" ? 0 : EPCGValue) +
-    totalSavings +
-    DutySavedOnDomesticalyProcuredCP +
-    DCGValue +
-    lastNPV3 +
-    lastNPVtotalBenifit +
-    lastNPVF;
+    normalizeValue(totalDuty) +
+    normalizeValue(EPCGValue) +
+    normalizeValue(totalSavings) +
+    normalizeValue(DutySavedOnDomesticalyProcuredCP) +
+    normalizeValue(DCGValue) +
+    normalizeValue(lastNPV3) +
+    normalizeValue(lastNPVtotalBenifit) +
+    normalizeValue(lastNPVF);
   console.log(
     "totalDuty,EPCGValue,totalSavings,DutySavedOnDomesticalyProcuredCP,DCGValue,lastNPV3,lastNPVtotalBenifit,lastNPVF",
     totalDuty,
@@ -1036,16 +1049,16 @@ async function getAllInputValues() {
     lastNPVF
   );
   let NetBeniftForMOOWR =
-    totalDuty +
-    (RowTwoThirdCell == "Nil" ? 0 : RowTwoThirdCell) +
-    totalSavings +
-    lastNPV +
-    lastNPVigst +
-    lastNPVtotalBenifit +
-    lastNPVF +
-    lastNPV2 +
-    lastNPVigst2 +
-    lastNPVrodtep;
+    normalizeValue(totalDuty) +
+    normalizeValue(RowTwoThirdCell) +
+    normalizeValue(totalSavings) +
+    normalizeValue(lastNPV) +
+    normalizeValue(lastNPVigst) +
+    normalizeValue(lastNPVtotalBenifit) +
+    normalizeValue(lastNPVF) +
+    normalizeValue(lastNPV2) +
+    normalizeValue(lastNPVigst2) +
+    normalizeValue(lastNPVrodtep);
   console.log(
     "totalDuty,RowTwoThirdCell,totalSavings,lastNPV,lastNPVigst,lastNPVtotalBenifitlastNPVF,lastNPV2,lastNPVigst2,lastNPVrodtep",
     totalDuty,
@@ -1059,18 +1072,17 @@ async function getAllInputValues() {
     lastNPVigst2,
     lastNPVrodtep
   );
-
   let NetBeniftForEOU =
-    totalDuty +
-    (EOUValue == "N/A" ? 0 : EOUValue) +
-    totalSavings +
-    DutySavedOnDomesticalyProcuredCP +
-    lastNPV +
-    lastNPVigst +
-    lastNPVF +
-    lastNPVigst2 +
-    lastNPV3 +
-    lastNPVtotalBenifit;
+    normalizeValue(totalDuty) +
+    normalizeValue(EOUValue) +
+    normalizeValue(totalSavings) +
+    normalizeValue(DutySavedOnDomesticalyProcuredCP) +
+    normalizeValue(lastNPV) +
+    normalizeValue(lastNPVigst) +
+    normalizeValue(lastNPVF) +
+    normalizeValue(lastNPVigst2) +
+    normalizeValue(lastNPV3) +
+    normalizeValue(lastNPVtotalBenifit);
   console.log(
     "totalDuty,EOUValue,totalSavings,DutySavedOnDomesticalyProcuredCP,lastNPV,lastNPVigst,lastNPVF,lastNPVigst2,lastNPV3,lastNPVtotalBenifit",
     totalDuty,
@@ -1085,27 +1097,27 @@ async function getAllInputValues() {
     lastNPVtotalBenifit
   );
 
-  let NetBeniftForSEZ =
-    totalDuty +
-    (EOUValue == "N/A" ? 0 : EOUValue) +
-    totalSavings +
-    AIRAccuredOnDTA +
-    DutySavedOnDomesticalyProcuredCPNetAIR +
-    lastNPV +
-    lastNPVigst +
-    lastNPV2 +
-    lastNPVF +
-    lastNPVigst2 +
-    lastNPVDRM +
-    DutySavedOnDomesticalyProcuredCPRawMaterialNetAIR +
-    lastNpvIGST +
-    lastNPVtotalBenifit +
-    gstOnConstruction +
-    constOfDuty +
-    lastNPVigst1 +
-    lastNPVigst5;
 
-  lastNPVigst2;
+let NetBeniftForSEZ =
+  normalizeValue(totalDuty) +
+  normalizeValue(EOUValue) +
+  normalizeValue(totalSavings) +
+  normalizeValue(AIRAccuredOnDTA) +
+  normalizeValue(DutySavedOnDomesticalyProcuredCPNetAIR) +
+  normalizeValue(lastNPV) +
+  normalizeValue(lastNPVigst) +
+  normalizeValue(lastNPV2) +
+  normalizeValue(lastNPVF) +
+  normalizeValue(lastNPVigst2) +
+  normalizeValue(lastNPVDRM) +
+  normalizeValue(DutySavedOnDomesticalyProcuredCPRawMaterialNetAIR) +
+  normalizeValue(lastNpvIGST) +
+  normalizeValue(lastNPVtotalBenifit) +
+  normalizeValue(gstOnConstruction) +
+  normalizeValue(constOfDuty) +
+  normalizeValue(lastNPVigst1) +
+  normalizeValue(lastNPVigst5);
+
   console.log(
     "totalDuty,EOUValue,totalSavings,AIRAccuredOnDTA,DutySavedOnDomesticalyProcuredCPNetAIR,lastNPV,lastNPVigst,lastNPV2,lastNPVF,lastNPVigst2,lastNPVDRM,DutySavedOnDomesticalyProcuredCPRawMaterialNetAIR,lastNpvIGST,lastNPVtotalBenifit,gstOnConstruction,constOfDuty,lastNPVigst1,lastNPVigst5",
     totalDuty,
@@ -1128,11 +1140,11 @@ async function getAllInputValues() {
     lastNPVigst5
   );
 
-  // console.log("NetBeniftForAA", NetBeniftForAA);
-  // console.log("NetBeniftForBR", NetBeniftForBR);
-  // console.log("NetBeniftForMOOWR", NetBeniftForMOOWR);
-  // console.log("NetBeniftForEOU", NetBeniftForEOU);
-  // console.log("NetBeniftForSEZ", NetBeniftForSEZ);
+  console.log("NetBeniftForAA", NetBeniftForAA);
+  console.log("NetBeniftForBR", NetBeniftForBR);
+  console.log("NetBeniftForMOOWR", NetBeniftForMOOWR);
+  console.log("NetBeniftForEOU", NetBeniftForEOU);
+  console.log("NetBeniftForSEZ", NetBeniftForSEZ);
 
   updatePDFAndDownload(
     // first row
@@ -1220,7 +1232,7 @@ async function updatePDFAndDownload(
   value27,
   value28
 ) {
-  // console.log("value8", value8);
+  console.log("value8", value8);
   console.log(
     value0,
     value1,
@@ -1281,6 +1293,7 @@ async function updatePDFAndDownload(
     }
 
     backtrack();
+
     return result;
   }
 
@@ -1311,8 +1324,10 @@ async function updatePDFAndDownload(
     return null;
   }
   const result = findFinalFile(baseValues, keys);
+  console.log("result", result);
   let url = "reports/" + result.fileName;
-  // console.log("url", url);
+  // let url = "reports/AA.pdf";
+  console.log("url", url);
   const existingPdfBytes = await fetch(url).then((res) => res.arrayBuffer());
   isNaN(value2) ? (value2 = 0) : (value2 = value2);
   const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
@@ -1320,7 +1335,7 @@ async function updatePDFAndDownload(
   const month = today.toLocaleString("default", { month: "long" });
   const year = today.getFullYear();
   const reportTitle = `Report ${month} - ${year}`;
-  // console.log("reportTitle", reportTitle);
+  console.log("reportTitle", reportTitle);
   const firstPage = pdfDoc.getPages()[0];
   const secondPage = pdfDoc.getPages()[2];
   const thirdPage = pdfDoc.getPages()[3];
@@ -1532,7 +1547,7 @@ async function updatePDFAndDownload(
     color: PDFLib.rgb(0, 0, 0),
     font: font,
   });
-  secondPage.drawText(("*").toString(), {
+  secondPage.drawText("*".toString(), {
     x: 672,
     y: 334,
     size: 20,
@@ -1992,14 +2007,14 @@ async function updatePDFAndDownload(
     font: font,
   });
   thirdPage.drawText(formatNumberPDF(value19).toString(), {
-    x: 585,
+    x: 575,
     y: 475,
     size: 10,
     color: PDFLib.rgb(0, 0, 0),
     font: font,
   });
   thirdPage.drawText(formatNumberPDF(value19).toString(), {
-    x: 655,
+    x: 645,
     y: 475,
     size: 10,
     color: PDFLib.rgb(0, 0, 0),
@@ -2008,7 +2023,7 @@ async function updatePDFAndDownload(
   thirdPage.drawText(
     formatNumberPDF(value3 == "N/A" ? "N/A" : value19).toString(),
     {
-      x: 720,
+      x: 710,
       y: 475,
       size: 10,
       color: PDFLib.rgb(0, 0, 0),
@@ -2018,7 +2033,7 @@ async function updatePDFAndDownload(
   thirdPage.drawText(
     formatNumberPDF(value3 == "N/A" ? "N/A" : value19).toString(),
     {
-      x: 785,
+      x: 775,
       y: 475,
       size: 10,
       color: PDFLib.rgb(0, 0, 0),
@@ -2488,6 +2503,5 @@ async function updatePDFAndDownload(
     </body>
   </html>
 `);
-
   newTab.document.close();
 }

@@ -1,3 +1,8 @@
+<?php
+/* 
+Template Name: Optii-Savr Calculator
+*/
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +20,8 @@
   <meta property="og:title" content="Optii-Savr Calculator | Tax Savings Tool">
   <meta property="og:description" content="Instantly compare EOU, SEZ, MOOWR, EPCG, and AA to determine tax savings on your manufacturing investment.">
   <meta property="og:image" content="https://optitaxs.com/services/img/calculator-preview.png">
-  <meta property="og:url" content="https://optitaxs.com/services/calculator.html">
+  <meta property="og:url" content="https://www.optitaxs.com/tools/Optii-Savr/Optii-Savr-Calculator.php">
+  <link rel="canonical" href="https://www.optitaxs.com/tools/Optii-Savr/Optii-Savr-Usermanual.php" />
   <meta property="og:type" content="website">
 
   <!-- Twitter -->
@@ -28,7 +34,7 @@
 <body>
     <!-- header -->
     <header>
-        <a href="/" aria-label="Home Page">
+        <a href="optii-savr.html" aria-label="Home Page">
           <h2><em>Optii-Savr</em></h2>
         </a>
     </header>
@@ -47,7 +53,7 @@
           <h2 id="second-nav-item" class="nav-item">Raw Material</h2>
         </div>
         <div>
-          <h2 id="third-nav-item" class="nav-item">Common Question</h2>
+          <h2 id="third-nav-item" class="nav-item">Common Questions</h2>
         </div>
       </nav>
       
@@ -322,7 +328,7 @@
                           </div>
                       </div>
                         <div class="input-box">
-                            <h2 class="input-title">Disposal of capital goods by way of 
+                            <h2 class="input-title">Disposal of capital goods by way of
                                 <div class="tooltip-container">
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -360,7 +366,7 @@
                                 autocomplete="off"
                                 class="input-11"
                                 name="Machine1"
-                                required
+                                required="true"
                               >
                                 <option >Choose</option>
                                 <option value="Sale in DTA">Sale in DTA </option>
@@ -2225,7 +2231,7 @@
                                   </svg>
                                   <span class="tooltip-text"
                                     >Total amount of All Industry Rate of Drawback receivable on
-                                    goods to be exported.</span
+                                    goods to be exported & sale to SEZ.</span
                                   >
                                 </div></h2>
                             <div class="input-tag">
@@ -2828,7 +2834,7 @@
           </div>
         </div>
     </main>
-    <h2 class="manual"><a aria-label="User Manual" href="usermanual.html">User Manual for Optii-Savr</a></h2>
+    <h2 class="manual"><a aria-label="User Manual" href="optii-savr-usermanual.html">User Manual for Optii-Savr</a></h2>
     <script id="first-js" src="https://code.jquery.com/jquery-3.6.4.min.js"
         integrity="sha384-UG8ao2jwOWB7/oDdObZc6ItJmwUkR/PfMyt9Qs5AwX7PsnYn1CRKCTWyncPTWvaS"
         crossorigin="anonymous"></script>
@@ -2913,19 +2919,33 @@
           }
         });
       }
-    
-      function goNext() {
-  // Validate dropdown on first box of first section
+
+function goNext() {
+  // Get references to inputs
+  const textInput = document.getElementById("first-left-input");
+  const selectInput = document.getElementById("third-right-input");
+
+  // Check if we're on the first box of the first section
   if (sectionIndex === 0 && boxIndex === 0) {
-    const select = document.getElementById("third-right-input");
-    const value = select.value;
-    if (value === "Choose" || value === "") {
-      
-      alert("Please select a valid option before proceeding.");
-      return; // Prevent going forward
+    const textValue = textInput.value.trim();
+
+    if (textValue !== "") {
+      // Make dropdown required
+      selectInput.setAttribute("required", "required");
+
+      // Validate dropdown
+      const selectValue = selectInput.value;
+      if (selectValue === "Choose" || selectValue === "") {
+        alert('Please select a "Disposal of capital goods by way of ".');
+        return; // Stop navigation
+      }
+    } else {
+      // Remove required if no text entered
+      selectInput.removeAttribute("required");
     }
   }
 
+  // Move to next box or section
   const currentSection = document.getElementById(sections[sectionIndex]);
   const boxCount = currentSection.children.length;
 
@@ -2939,6 +2959,7 @@
   showCurrentBox();
   updateProgress();
 }
+
 
     
       function goPrev() {
@@ -3053,29 +3074,7 @@ $("#raw-que-domestic-no").click(() => {
     </script>
     
     <script>
-      // $(".faq-div .add").click(function () {
-      //   $(this).closest(".faq-div").find(".ans").slideToggle();
-      //   const icon = $(this);
-      //   if (icon.attr("src") === "plus.png") {
-      //     icon.attr("src", "img/minus.png");
-      //   } else {
-      //     icon.attr("src", "img/plus.png");
-      //   }
-      // });
-      
-      // $(document).ready(function () {
-      //   $("[id^=title]").on("click", function () {
-      //     const iconId = $(this).attr("id");
-      //     const sectionId = "section" + iconId.replace("title", "");
-      //     const section = $("#" + sectionId);
-      //     section.css("display", function (_, currentDisplay) {
-      //       return currentDisplay === "block" ? "none" : "block";
-      //     });
-      //     const icon = $(this);
-      //     const isExpanded = section.css("display") === "block";
-      //     icon.attr("src", isExpanded ? "img/minus.png" : "img/plus.png");
-      //   });
-      // });
+     
 $(function () {
   // Main section toggle
   $(".title-q .add").click(function () {
@@ -3100,10 +3099,6 @@ $(function () {
     });
   });
 });
-
-
-
-      
       const learnMoreBtn = document.getElementById("learn-more-btn");
       const popupBox = document.getElementById("popup-box");
       const closeBtn = document.querySelector(".close-btn3");
@@ -3176,5 +3171,7 @@ function formatNumber(id) {
 
     </script>
 </body>
-
+<?php
+get_footer();
+?>
 </html>

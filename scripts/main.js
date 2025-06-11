@@ -106,10 +106,11 @@ function safeParseFloat(value) {
   if (typeof value !== "string") {
     value = String(value);
   }
-  return isNaN(parseFloat(value.replace(/,/g, "")))
-    ? 0
-    : parseFloat(value.replace(/,/g, ""));
+  const cleaned = value.replace(/,/g, "");
+  const parsed = parseFloat(cleaned);
+  return isNaN(parsed) || !isFinite(parsed) ? 0 : parsed;
 }
+
 
 // 1) Calculate Total Duty
 function CalculateDuty(
@@ -168,17 +169,23 @@ function calculateDepreciationValue(value, grossIntendedPeriod) {
 }
 
 // 3) Calculate NPV
-function CalculateNPV(Value, rateOfInterest, years) {
-  let E = 0;
-  for (let i = 0; i < years; i++) {
-    if (E == 0) {
-      E = safeParseFloat(rateOfInterest) / 100 + 1;
-    } else {
-      E = E * (safeParseFloat(rateOfInterest) / 100 + 1);
-    }
+function CalculateNPV(value, rateOfInterest, years) {
+  const rate = safeParseFloat(rateOfInterest);
+  const time = safeParseFloat(years);
+  const principal = safeParseFloat(value);
+
+  if (rate < 0 || time <= 0 || principal === 0) return 0;
+
+  let discountFactor = 1;
+  for (let i = 0; i < time; i++) {
+    discountFactor *= (rate / 100 + 1);
   }
-  return Math.round(Value / E);
+
+  if (discountFactor === 0 || !isFinite(discountFactor)) return 0;
+
+  return Math.round(principal / discountFactor);
 }
+
 
 // 4) Calculate Growth for value till number of years
 function CalculateGrowth(value, growthRate, years) {
@@ -433,6 +440,11 @@ async function getAllInputValues() {
   // 3) MOOWR Value (Row 2(Third Cell))
   // scenario 1 A (Sale In DTA)
   let RowTwoThirdCell = 0;
+  console.log("NPV Input →", {
+  totalDuty,
+  rateOfInterest,
+  grossIntendedPeriod
+});
   if (grossDisposal === "Sale in DTA") {
     RowTwoThirdCell =
       CalculateNPV(totalDuty, rateOfInterest, grossIntendedPeriod) * -1;

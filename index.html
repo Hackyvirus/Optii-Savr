@@ -1,3 +1,8 @@
+<?php
+/* 
+Template Name: Optii-Savr Home
+*/
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,14 +18,14 @@
       name="keywords"
       content="Indirect Tax, India Manufacturing, Tax Saving Schemes, SEZ, MOOWR, EPCG, AA, EOU, GST, Customs, Optii-Savr"
     />
-    <meta name="author" content="Optitax" />
+    <meta name="author" content="Optitax's" />
+    <link rel="canonical" href="https://www.optitaxs.com/optii-savr-usermanual.php" />
     <link
       rel="shortcut icon"
       href="https://optitaxs.com/wp-content/uploads/2022/06/cropped-favicon-192x192.png"
       type="image/x-icon"
     />
-    <link rel="stylesheet" href="css/home.css" />
-
+   <link rel="stylesheet" href="css/home.css">
     <!-- Open Graph -->
     <meta
       property="og:title"
@@ -402,17 +407,17 @@
           <button id="learn-more-btn">Learn more about schemes</button>
           <button id="comparison-of-scheme">Comparison of the schemes</button>
           <button id="learn-more-relevant">
-            Explanation of relevant terms used in the evaluator
+            Explanation of relevant terms
           </button>
         </div>
         <p id="strong-info">
           <strong
             >Optii-Savr helps in calculating the net benefit available while
-            opting for the respective scheme over the DTA unit
+            opting for the respective scheme over the other schemes
           </strong>
         </p>
         <p>
-          This exercise will take approximately 30 minutes and will provide
+          This exercise will take approximately 20 minutes and will provide
           essential input for appropriate decision making. In today’s business
           environment, especially the price sensitive markets, cost
           competitiveness, selecting an appropriate scheme can positively impact
@@ -421,7 +426,7 @@
           precise calculation which may require microlevel information.
         </p>
         <p id="free-msg">
-          <strong>Optii-Savr is absolutely free</strong>
+          <strong><i>Optii-Savr is absolutely free</i></strong>
         </p>
 
         <!-- Pop-up Box -->
@@ -472,7 +477,7 @@
 
       $("#acceptBtn").on("click", function () {
         if ($("#checkbox").is(":checked")) {
-          window.location.href = "calculator.html";
+          window.location.href = "optii-Savr-calculator.html";
         } else {
           alert("Please accept the terms and conditions");
         }
@@ -527,4 +532,7 @@
       });
     </script>
   </body>
+<?php
+get_footer();
+?>
 </html>

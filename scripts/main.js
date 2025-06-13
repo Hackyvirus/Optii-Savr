@@ -2333,7 +2333,7 @@ async function updatePDFAndDownload(
             <!-- Hidden Fields for FormSubmit -->
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_autoresponse" value="Thank you for your feedback!">
-            <input type="hidden" name="_next" value="https://optitaxs.com/optii-savr-calculator/">
+            <input type="hidden" name="_next" value="https://hackyvirus.github.io/Optii-Savr/optii-savr-calculator.html">
         
             <!-- Submit and Skip Buttons -->
             <div class="submit-skip">
